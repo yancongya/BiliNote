@@ -294,9 +294,9 @@ const ProviderForm = ({ isCreate = false }: { isCreate?: boolean }) => {
       <div className="flex max-w-xl flex-col gap-4">
         <div className="flex flex-col gap-2">
           <span className="font-bold">模型列表</span>
-          <div className={'flex flex-col gap-2 rounded bg-[#FEF0F0] p-2.5'}>
-            <h2 className={'font-bold'}>注意!</h2>
-            <span>请确保已经保存供应商信息,以及通过测试连通性.</span>
+          <div className={'flex flex-col gap-2 rounded bg-[#FEF0F0] dark:bg-red-900/20 p-2.5'}>
+            <h2 className={'font-bold dark:text-red-200'}>注意!</h2>
+            <span className="dark:text-red-100">请确保已经保存供应商信息,以及通过测试连通性.</span>
           </div>
           <ModelSelector providerId={id!} />
 
@@ -313,9 +313,20 @@ const ProviderForm = ({ isCreate = false }: { isCreate?: boolean }) => {
               models && models.map(model => {
                 return (
                   <>
-                    <Tag onClose={()=>{
-                      handelDelete(model.id)
-                    }} key={model.id} closable color={'blue'}>
+                    <Tag
+                      onClose={()=>{
+                        handelDelete(model.id)
+                      }}
+                      key={model.id}
+                      closable
+                      color={'blue'}
+                      style={{
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        color: 'rgb(59, 130, 246)',
+                      }}
+                      className="dark:bg-blue-900/30 dark:border-blue-700 dark:text-blue-300"
+                    >
                       {model.model_name}
                     </Tag></>
 

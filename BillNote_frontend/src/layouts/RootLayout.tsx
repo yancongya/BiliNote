@@ -1,5 +1,8 @@
 import type { ReactNode, FC } from 'react'
-// import "@/global.css"
+import { ThemeProvider } from '@/contexts/ThemeContext'
+import { ConfigProvider, theme } from 'antd'
+import zhCN from 'antd/locale/zh_CN'
+import { useTheme } from '@/contexts/ThemeContext'
 import { Toaster } from 'react-hot-toast'
 
 interface RootLayoutProps {
@@ -11,21 +14,43 @@ export const metadata = {
   description: '通过视频链接结合大模型自动生成对应的笔记',
 }
 
+const ThemeWrapper: FC<{ children: ReactNode }> = ({ children }) => {
+  const { theme: currentTheme } = useTheme()
+
+  return (
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: {
+          colorPrimary: '#3c77fb',
+        },
+      }}
+    >
+      {children}
+    </ConfigProvider>
+  )
+}
+
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-neutral-100 font-sans text-neutral-900">
-      <Toaster
-        position="top-center" // 顶部居中显示
-        toastOptions={{
-          style: {
-            borderRadius: '8px',
-            background: '#333',
-            color: '#fff',
-          },
-        }}
-      />
-      {children}
-    </div>
+    <ThemeProvider>
+      <ThemeWrapper>
+        <div className="min-h-screen bg-neutral-100 font-sans text-neutral-900 dark:bg-gray-900 dark:text-gray-100">
+          <Toaster
+            position="top-center" // 顶部居中显示
+            toastOptions={{
+              style: {
+                borderRadius: '8px',
+                background: '#333',
+                color: '#fff',
+              },
+            }}
+          />
+          {children}
+        </div>
+      </ThemeWrapper>
+    </ThemeProvider>
   )
 }
 

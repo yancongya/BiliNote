@@ -1,6 +1,5 @@
 import { Switch } from '@/components/ui/switch.tsx'
 import { FC } from 'react'
-import styles from './index.module.css'
 import { useNavigate, useParams } from 'react-router-dom'
 import AILogo from '@/components/Form/modelForm/Icons'
 import { useProviderStore } from '@/store/providerStore'
@@ -26,11 +25,11 @@ const ProviderCard: FC<IProviderCardProps> = ({ providerName, Icon, id }: IProvi
       onClick={() => {
         handleClick()
       }}
-      className={
-        styles.card +
-        ' flex h-14 items-center justify-between rounded border border-[#f3f3f3] p-2' +
-        (isActive ? ' bg-[#F0F0F0] font-semibold text-blue-600' : '')
-      }
+      className={`flex h-14 items-center justify-between rounded border border-[#f3f3f3] dark:border-gray-600 p-2 cursor-pointer transition-all duration-200 ease-in-out
+        ${isActive
+          ? 'bg-[#F0F0F0] dark:bg-gray-700 font-semibold text-blue-600 dark:text-blue-400'
+          : 'hover:bg-[#f7f7f7] dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'}
+      `}
     >
       <div className="flex items-center gap-2 text-lg">
         <div className="flex h-6 w-6 items-center">{<Icon></Icon>}</div>

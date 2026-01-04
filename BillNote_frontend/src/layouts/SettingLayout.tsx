@@ -8,30 +8,27 @@ import { Link, Outlet } from 'react-router-dom'
 import { SlidersHorizontal } from 'lucide-react'
 import React from 'react'
 import logo from '@/assets/icon.svg'
+import ThemeToggle from '@/components/ThemeToggle.tsx'
 
 interface ISettingLayoutProps {
   Menu: React.ReactNode
 }
 const SettingLayout = ({ Menu }: ISettingLayoutProps) => {
   return (
-    <div
-      className="h-full w-full"
-      style={{
-        backgroundColor: 'var(--color-muted)',
-      }}
-    >
+    <div className="h-full w-full bg-muted dark:bg-gray-900">
       <div className="flex flex-1">
         {/* 左侧部分：Header + 表单 */}
-        <aside className="flex w-[300px] flex-col border-r border-neutral-200 bg-white">
+        <aside className="flex w-[300px] flex-col border-r border-neutral-200 bg-white dark:bg-gray-800 dark:border-gray-700">
           {/* Header */}
           <header className="flex h-16 items-center justify-between px-6">
             <div className="flex items-center gap-2">
               <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-2xl">
                 <img src={logo} alt="logo" className="h-full w-full object-contain" />
               </div>
-              <div className="text-2xl font-bold text-gray-800">BiliNote</div>
+              <div className="text-2xl font-bold text-gray-800 dark:text-gray-100">BiliNote</div>
             </div>
-            <div>
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger>
@@ -48,15 +45,17 @@ const SettingLayout = ({ Menu }: ISettingLayoutProps) => {
           </header>
 
           {/* 表单内容 */}
-          <div className="flex-1 overflow-auto p-4">
+          <div className="flex-1 overflow-auto p-4 bg-white dark:bg-gray-800">
             {/*<NoteForm />*/}
             {Menu}
           </div>
         </aside>
 
         {/* 右侧预览区域 */}
-        <main className="h-screen flex-1 overflow-hidden">
-          <Outlet />
+        <main className="h-screen flex-1 overflow-hidden bg-white dark:bg-gray-800">
+          <div className="h-full w-full bg-white dark:bg-gray-800">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>

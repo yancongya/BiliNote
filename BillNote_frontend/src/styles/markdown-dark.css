@@ -1,0 +1,80 @@
+/* 暗色模式下的 Markdown 样式 */
+.dark .markdown-body {
+  color: #e6e6e6;
+  background-color: #1a1a1a;
+}
+
+.dark .markdown-body a {
+  color: #58a6ff;
+}
+
+.dark .markdown-body a:hover {
+  color: #79b8ff;
+}
+
+.dark .markdown-body img {
+  background-color: #0d1117;
+}
+
+.dark .markdown-body code,
+.dark .markdown-body pre {
+  background-color: #2d333b;
+  color: #e1e4e8;
+}
+
+.dark .markdown-body blockquote {
+  border-left-color: #444d56;
+  color: #959da5;
+}
+
+.dark .markdown-body hr {
+  background-color: #444d56;
+}
+
+.dark .markdown-body table tr:nth-child(2n) {
+  background-color: #161b22;
+}
+
+.dark .markdown-body table th,
+.dark .markdown-body table td {
+  border-color: #3b434b;
+}
+
+.dark .markdown-body .highlight pre,
+.dark .markdown-body pre {
+  background-color: #2d333b;
+}
+
+.dark .markdown-body .highlight {
+  background-color: #2d333b;
+}
+
+.dark .markdown-body h1,
+.dark .markdown-body h2,
+.dark .markdown-body h3,
+.dark .markdown-body h4,
+.dark .markdown-body h5,
+.dark .markdown-body h6 {
+  color: #ffffff;
+}
+
+.dark .markdown-body strong {
+  color: #ffffff;
+}
+
+.dark .markdown-body li {
+  color: #e6e6e6;
+}
+
+.dark .markdown-body p {
+  color: #e6e6e6;
+}
+
+.dark .markdown-body .origin-link a {
+  background-color: #238636;
+  color: #ffffff;
+}
+
+.dark .markdown-body .origin-link a:hover {
+  background-color: #2ea043;
+}

@@ -16,6 +16,7 @@ import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 import 'katex/dist/katex.min.css'
 import 'github-markdown-css/github-markdown-light.css'
+import '@/styles/markdown-dark.css'
 import { FC } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area.tsx'
 import { useTaskStore } from '@/store/taskStore'
@@ -203,7 +204,7 @@ const MarkdownViewer: FC<MarkdownViewerProps> = ({ status }) => {
       />
 
       {viewMode === 'map' ? (
-        <div className="flex w-full flex-1 overflow-hidden bg-white">
+        <div className="flex w-full flex-1 overflow-hidden bg-white dark:bg-gray-800">
           <div className={'w-full'}>
             <MarkmapEditor
               value={selectedContent}
@@ -214,11 +215,11 @@ const MarkdownViewer: FC<MarkdownViewerProps> = ({ status }) => {
           </div>
         </div>
       ) : (
-        <div className="flex flex-1 overflow-hidden bg-white py-2">
+        <div className="flex flex-1 overflow-hidden bg-white dark:bg-gray-800 py-2">
           {selectedContent && selectedContent !== 'loading' && selectedContent !== 'empty' ? (
             <>
               <ScrollArea className="w-full">
-                <div className={'markdown-body w-full px-2'}>
+                <div className={'markdown-body w-full px-2 dark:bg-gray-800'}>
                   <ReactMarkdown
                     remarkPlugins={[gfm, remarkMath]}
                     rehypePlugins={[rehypeKatex]}
@@ -384,15 +385,15 @@ const MarkdownViewer: FC<MarkdownViewerProps> = ({ status }) => {
 
                         if (!inline && match) {
                           return (
-                            <div className="group bg-muted relative my-6 overflow-hidden rounded-lg border shadow-sm">
-                              <div className="bg-muted text-muted-foreground flex items-center justify-between px-4 py-1.5 text-sm font-medium">
+                            <div className="group bg-muted dark:bg-gray-700 relative my-6 overflow-hidden rounded-lg border shadow-sm">
+                              <div className="bg-muted dark:bg-gray-700 text-muted-foreground dark:text-gray-300 flex items-center justify-between px-4 py-1.5 text-sm font-medium">
                                 <div>{match[1].toUpperCase()}</div>
                                 <button
                                   onClick={() => {
                                     navigator.clipboard.writeText(codeContent)
                                     toast.success('代码已复制')
                                   }}
-                                  className="bg-background/80 hover:bg-background flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors"
+                                  className="bg-background/80 dark:bg-gray-600 hover:bg-background dark:hover:bg-gray-500 flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium transition-colors"
                                 >
                                   <Copy className="h-3.5 w-3.5" />
                                   复制

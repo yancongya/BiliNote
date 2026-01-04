@@ -1,4 +1,3 @@
-import styles from './index.module.css'
 import { FC, JSX } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -21,13 +20,13 @@ const MenuBar: ({ menuItem }: { menuItem: any }) => JSX.Element = ({ menuItem })
   return (
     <Link to={menuItem.path} className="w-full">
       <div
-        className={
-          styles.menuBar +
-          ' flex h-12 w-full items-center gap-1 rounded px-2' +
-          (isActive ? ' bg-[#F0F0F0] font-semibold text-blue-600' : '')
-        }
+        className={`flex h-12 w-full items-center gap-1 rounded px-2 cursor-pointer transition-all duration-200 ease-in-out
+          ${isActive
+            ? 'bg-[#F0F0F0] dark:bg-gray-700 font-semibold text-blue-600 dark:text-blue-400'
+            : 'hover:bg-[#f7f7f7] dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'}
+        `}
       >
-        <div className="h-6 w-6">{menuItem.icon}</div>
+        <div className="h-6 w-6 text-gray-700 dark:text-gray-300">{menuItem.icon}</div>
         <div className="text-[16px]">{menuItem.name}</div>
       </div>
     </Link>
