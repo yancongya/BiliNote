@@ -338,6 +338,10 @@ const MarkdownViewer: FC<MarkdownViewerProps> = ({ status }) => {
 
                       // Enhanced list items with support for "fake headings"
                       li: ({ children, ...props }) => {
+                        // 过滤掉非标准的 HTML 属性，避免 React 警告
+                        const filteredProps = { ...props }
+                        delete filteredProps.ordered
+
                         const rawText = String(children)
                         const isFakeHeading = /^(\*\*.+\*\*)$/.test(rawText.trim())
 
@@ -348,25 +352,37 @@ const MarkdownViewer: FC<MarkdownViewerProps> = ({ status }) => {
                         }
 
                         return (
-                          <li className="my-1" {...props}>
+                          <li className="my-1" {...filteredProps}>
                             {children}
                           </li>
                         )
                       },
 
                       // Enhanced unordered lists
-                      ul: ({ children, ...props }) => (
-                        <ul className="my-6 ml-6 list-disc [&>li]:mt-2" {...props}>
-                          {children}
-                        </ul>
-                      ),
+                      ul: ({ children, ...props }) => {
+                        // 过滤掉非标准的 HTML 属性，避免 React 警告
+                        const filteredProps = { ...props }
+                        delete filteredProps.ordered
+
+                        return (
+                          <ul className="my-6 ml-6 list-disc [&>li]:mt-2" {...filteredProps}>
+                            {children}
+                          </ul>
+                        )
+                      },
 
                       // Enhanced ordered lists
-                      ol: ({ children, ...props }) => (
-                        <ol className="my-6 ml-6 list-decimal [&>li]:mt-2" {...props}>
-                          {children}
-                        </ol>
-                      ),
+                      ol: ({ children, ...props }) => {
+                        // 过滤掉非标准的 HTML 属性，避免 React 警告
+                        const filteredProps = { ...props }
+                        delete filteredProps.ordered
+
+                        return (
+                          <ol className="my-6 ml-6 list-decimal [&>li]:mt-2" {...filteredProps}>
+                            {children}
+                          </ol>
+                        )
+                      },
 
                       // Enhanced blockquotes
                       blockquote: ({ children, ...props }) => (

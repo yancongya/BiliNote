@@ -50,13 +50,13 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
             <input
                 type="text"
                 placeholder="搜索笔记标题..."
-                className="w-full rounded border border-neutral-300 px-3 py-1 text-sm outline-none focus:border-primary"
+                className="w-full rounded border border-neutral-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-3 py-1 text-sm outline-none focus:border-primary dark:text-white"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
             />
           </div>
-          <div className="rounded-md border border-neutral-200 bg-neutral-50 py-6 text-center">
-            <p className="text-sm text-neutral-500">暂无记录</p>
+          <div className="rounded-md border border-neutral-200 dark:border-gray-700 bg-neutral-50 dark:bg-gray-800 py-6 text-center">
+            <p className="text-sm text-neutral-500 dark:text-gray-400">暂无记录</p>
           </div>
         </>
 
@@ -70,9 +70,9 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
         <input
             type="text"
             placeholder="搜索笔记标题..."
-            className="w-full rounded border border-neutral-300 px-3 py-1 text-sm outline-none focus:border-primary"
+            className="w-full rounded border border-neutral-300 dark:border-gray-600 bg-white dark:bg-gray-700 px-3 py-1 text-sm outline-none focus:border-primary dark:text-white"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={e => setRawSearch(e.target.value)}
         />
       </div>
       <div className="flex flex-col gap-2 overflow-hidden">
@@ -81,8 +81,8 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
             key={task.id}
             onClick={() => onSelect(task.id)}
             className={cn(
-              'flex cursor-pointer flex-col rounded-md border border-neutral-200 p-3',
-              selectedId === task.id && 'border-primary bg-primary-light'
+              'flex cursor-pointer flex-col rounded-md border border-neutral-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-800',
+              selectedId === task.id && 'border-primary bg-primary-light dark:bg-blue-900/30'
             )}
           >
             <div
@@ -115,7 +115,7 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="line-clamp-2 max-w-[180px] flex-1 overflow-hidden text-sm text-ellipsis">
+                      <div className="line-clamp-2 max-w-[180px] flex-1 overflow-hidden text-sm text-ellipsis dark:text-gray-200">
                         {task.audioMeta.title || '未命名笔记'}
                       </div>
                     </TooltipTrigger>
@@ -129,19 +129,19 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
             <div className={'mt-2 flex items-center justify-between text-[10px]'}>
               <div className="shrink-0">
                 {task.status === 'SUCCESS' && (
-                  <div className={'bg-primary w-10 rounded p-0.5 text-center text-white'}>
+                  <div className={'bg-primary w-10 rounded p-0.5 text-center text-white dark:bg-blue-600'}>
                     已完成
                   </div>
                 )}
                 {task.status !== 'SUCCESS' && task.status !== 'FAILED' ? (
-                  <div className={'w-10 rounded bg-green-500 p-0.5 text-center text-white'}>
+                  <div className={'w-10 rounded bg-green-500 p-0.5 text-center text-white dark:bg-green-600'}>
                     等待中
                   </div>
                 ) : (
                   <></>
                 )}
                 {task.status === 'FAILED' && (
-                  <div className={'w-10 rounded bg-red-500 p-0.5 text-center text-white'}>失败</div>
+                  <div className={'w-10 rounded bg-red-500 p-0.5 text-center text-white dark:bg-red-600'}>失败</div>
                 )}
               </div>
 
@@ -157,9 +157,9 @@ const NoteHistory: FC<NoteHistoryProps> = ({ onSelect, selectedId }) => {
                           e.stopPropagation()
                           removeTask(task.id)
                         }}
-                        className="shrink-0"
+                        className="shrink-0 dark:text-gray-400 dark:hover:text-gray-200"
                       >
-                        <Trash className="text-muted-foreground h-4 w-4" />
+                        <Trash className="text-muted-foreground h-4 w-4 dark:text-gray-400" />
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>
