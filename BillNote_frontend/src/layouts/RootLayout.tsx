@@ -1,9 +1,11 @@
 import type { ReactNode, FC } from 'react'
+import { Suspense } from 'react'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { ConfigProvider, theme } from 'antd'
 import zhCN from 'antd/locale/zh_CN'
 import { useTheme } from '@/contexts/ThemeContext'
 import { Toaster } from 'react-hot-toast'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 interface RootLayoutProps {
   children: ReactNode
@@ -24,6 +26,8 @@ const ThemeWrapper: FC<{ children: ReactNode }> = ({ children }) => {
         algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
         token: {
           colorPrimary: '#3c77fb',
+          colorBgLayout: currentTheme === 'dark' ? '#1f1f1f' : '#f5f5f5',
+          colorBgContainer: currentTheme === 'dark' ? '#141414' : '#ffffff',
         },
       }}
     >
@@ -36,7 +40,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
     <ThemeProvider>
       <ThemeWrapper>
-        <div className="min-h-screen bg-neutral-100 font-sans text-neutral-900 dark:bg-gray-900 dark:text-gray-100">
+        <div className="min-h-screen bg-background font-sans text-foreground">
           <Toaster
             position="top-center" // 顶部居中显示
             toastOptions={{

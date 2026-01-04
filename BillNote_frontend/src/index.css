@@ -3,6 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* 在加载时设置默认暗色主题 */
 html {
   @apply bg-background text-foreground;
 }
@@ -11,6 +12,36 @@ body, #root {
   height: 100%;
   overflow: hidden;
   @apply bg-background text-foreground;
+}
+
+/* 预设暗色模式类，避免主题切换闪烁 */
+html, body {
+  background-color: #0f172a; /* 暗色背景 */
+  color: #e2e8f0;
+}
+
+html.dark, html.dark body, html.dark #root {
+  background-color: #0f172a; /* 暗色背景 */
+  color: #e2e8f0;
+}
+
+html.light, html.light body, html.light #root {
+  background-color: #f1f5f9; /* 亮色背景 */
+  color: #1e293b;
+}
+
+/* 扫光动画 */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }
 
 /* 修改滚动条轨道颜色 */

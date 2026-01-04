@@ -2,11 +2,68 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Github, Star, ExternalLink, Download } from 'lucide-react'
+import { Github, ExternalLink, Download } from 'lucide-react'
 import { ScrollArea } from '@/components/ui/scroll-area.tsx'
 import logo from '@/assets/icon.svg'
+import { useState, useEffect } from 'react'
+import SettingPageSkeleton from './SettingPageSkeleton'
 
-export default function AboutPage() {
+const AboutPage = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    // 模拟一个短暂的加载时间，确保骨架图显示
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-12 dark:bg-gray-800">
+        <div className="mb-16 flex flex-col items-center justify-center text-center">
+          <div className="mb-4 flex items-center gap-4">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer"></div>
+            <div className="h-12 w-64 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+          </div>
+          <div className="text-muted-foreground mb-6 text-xl italic h-6 w-80 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
+            <div className="h-6 w-20 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-6 w-20 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-6 w-20 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="h-10 w-32 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-10 w-32 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-10 w-32 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+          </div>
+        </div>
+
+        <section className="mb-16">
+          <div className="h-8 w-64 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded mb-6 mx-auto text-center"></div>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="h-5 w-full bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded mb-2"></div>
+            <div className="h-5 w-4/5 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded mb-2"></div>
+            <div className="h-5 w-3/4 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <div className="h-8 w-64 bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded mb-8 mx-auto text-center"></div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="h-32 w-full bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-32 w-full bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+            <div className="h-32 w-full bg-gradient-to-r from-muted via-muted/80 to-muted bg-[length:200%_100%] animate-shimmer rounded"></div>
+          </div>
+        </section>
+      </div>
+    )
+  }
+
   const images = [
     'https://common-1304618721.cos.ap-chengdu.myqcloud.com/20250504102850.png',
     'https://common-1304618721.cos.ap-chengdu.myqcloud.com/20250504103028.png',
@@ -225,3 +282,5 @@ export default function AboutPage() {
     </ScrollArea>
   )
 }
+
+export default AboutPage

@@ -105,11 +105,25 @@ class ModelService:
         provider = ProviderService.get_provider_by_id(id)
 
         if provider:
-            if not provider.get('api_key'):
+            # 对于某些提供者（如 Ollama），可能不需要 API 密钥
+            api_key = provider.get('api_key', '')
+            base_url = provider.get('base_url', '')
+
+            # 检查是否为不需要 API 密钥的提供者类型
+            no_auth_providers = ['ollama', 'built-in']  # 可以根据需要扩展这个列表
+            provider_type = provider.get('type', '')
+            provider_name = provider.get('name', '').lower()
+
+            # 如果是不需要认证的提供者类型，使用空的 API 密钥进行测试
+            if provider_type in no_auth_providers or provider_name in no_auth_providers:
+                api_key = 'dummy'  # 使用一个虚拟的 API 密钥，因为 OpenAI 客户端需要它
+
+            if not api_key and provider_type != 'built-in' and provider_name not in no_auth_providers:
                 raise ProviderError(code=ProviderErrorEnum.NOT_FOUND.code, message=ProviderErrorEnum.NOT_FOUND.message)
+
             result =  OpenAICompatibleProvider.test_connection(
-                api_key=provider.get('api_key'),
-                base_url=provider.get('base_url')
+                api_key=api_key,
+                base_url=base_url
             )
             if result:
                 return True
